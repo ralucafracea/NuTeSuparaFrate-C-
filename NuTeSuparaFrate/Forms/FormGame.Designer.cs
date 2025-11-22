@@ -1,0 +1,99 @@
+﻿namespace NuTeSuparaFrate.Forms
+{
+    partial class FormGame
+    {
+
+        private System.ComponentModel.IContainer components = null;
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.btnRollDice = new System.Windows.Forms.Button();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.pbBoard = new System.Windows.Forms.PictureBox();
+            this.lblJucatorCurent = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBoard)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // btnRollDice
+            // 
+            this.btnRollDice.AutoSize = true;
+            this.btnRollDice.Location = new System.Drawing.Point(780, 97);
+            this.btnRollDice.Name = "btnRollDice";
+            this.btnRollDice.Size = new System.Drawing.Size(151, 87);
+            this.btnRollDice.TabIndex = 0;
+            this.btnRollDice.Text = "Roll Dice";
+            this.btnRollDice.UseVisualStyleBackColor = true;
+            this.btnRollDice.Click += new System.EventHandler(this.btnRollDice_Click);
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(827, 341);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(48, 16);
+            this.lblStatus.TabIndex = 1;
+            this.lblStatus.Text = "Ready";
+            // 
+            // pbBoard
+            // 
+            this.pbBoard.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbBoard.Location = new System.Drawing.Point(12, 3);
+            this.pbBoard.Name = "pbBoard";
+            this.pbBoard.Size = new System.Drawing.Size(663, 648);
+            this.pbBoard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbBoard.TabIndex = 2;
+            this.pbBoard.TabStop = false;
+            // 
+            // lblJucatorCurent
+            // 
+            this.lblJucatorCurent.AutoSize = true;
+            this.lblJucatorCurent.Location = new System.Drawing.Point(808, 386);
+            this.lblJucatorCurent.Name = "lblJucatorCurent";
+            this.lblJucatorCurent.Size = new System.Drawing.Size(92, 16);
+            this.lblJucatorCurent.TabIndex = 3;
+            this.lblJucatorCurent.Text = "Jucator Curent";
+            this.lblJucatorCurent.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // FormGame
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1022, 653);
+            this.Controls.Add(this.lblJucatorCurent);
+            this.Controls.Add(this.pbBoard);
+            this.Controls.Add(this.lblStatus);
+            this.Controls.Add(this.btnRollDice);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Name = "FormGame";
+            this.Text = "Form1";
+            this.Load += new System.EventHandler(this.FormGame_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pbBoard)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button btnRollDice;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.PictureBox pbBoard;
+        private System.Windows.Forms.Label lblJucatorCurent;
+    }
+}

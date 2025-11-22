@@ -1,0 +1,161 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3866965C-D8E7-4303-A656-34AC6A1BF483}|NuTeSuparaFrate\\NuTeSuparaFrate.csproj|c:\\fracearalucamaria\\nutesuparafrate\\nutesuparafrate\\forms\\formstart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{3866965C-D8E7-4303-A656-34AC6A1BF483}|NuTeSuparaFrate\\NuTeSuparaFrate.csproj|solutionrelative:nutesuparafrate\\forms\\formstart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3866965C-D8E7-4303-A656-34AC6A1BF483}|NuTeSuparaFrate\\NuTeSuparaFrate.csproj|C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\nutesuparafrate\\forms\\formgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{3866965C-D8E7-4303-A656-34AC6A1BF483}|NuTeSuparaFrate\\NuTeSuparaFrate.csproj|solutionrelative:nutesuparafrate\\forms\\formgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3866965C-D8E7-4303-A656-34AC6A1BF483}|NuTeSuparaFrate\\NuTeSuparaFrate.csproj|C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\nutesuparafrate\\forms\\formstart.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3866965C-D8E7-4303-A656-34AC6A1BF483}|NuTeSuparaFrate\\NuTeSuparaFrate.csproj|solutionrelative:nutesuparafrate\\forms\\formstart.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3866965C-D8E7-4303-A656-34AC6A1BF483}|NuTeSuparaFrate\\NuTeSuparaFrate.csproj|C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\nutesuparafrate\\forms\\formgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3866965C-D8E7-4303-A656-34AC6A1BF483}|NuTeSuparaFrate\\NuTeSuparaFrate.csproj|solutionrelative:nutesuparafrate\\forms\\formgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3866965C-D8E7-4303-A656-34AC6A1BF483}|NuTeSuparaFrate\\NuTeSuparaFrate.csproj|C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\nutesuparafrate\\model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3866965C-D8E7-4303-A656-34AC6A1BF483}|NuTeSuparaFrate\\NuTeSuparaFrate.csproj|solutionrelative:nutesuparafrate\\model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|NuTeSuparaFrate||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3866965C-D8E7-4303-A656-34AC6A1BF483}|NuTeSuparaFrate\\NuTeSuparaFrate.csproj|C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\nutesuparafrate\\forms\\formgame.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3866965C-D8E7-4303-A656-34AC6A1BF483}|NuTeSuparaFrate\\NuTeSuparaFrate.csproj|solutionrelative:nutesuparafrate\\forms\\formgame.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3866965C-D8E7-4303-A656-34AC6A1BF483}|NuTeSuparaFrate\\NuTeSuparaFrate.csproj|C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\nutesuparafrate\\forms\\formstart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3866965C-D8E7-4303-A656-34AC6A1BF483}|NuTeSuparaFrate\\NuTeSuparaFrate.csproj|solutionrelative:nutesuparafrate\\forms\\formstart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3866965C-D8E7-4303-A656-34AC6A1BF483}|NuTeSuparaFrate\\NuTeSuparaFrate.csproj|C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\nutesuparafrate\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3866965C-D8E7-4303-A656-34AC6A1BF483}|NuTeSuparaFrate\\NuTeSuparaFrate.csproj|solutionrelative:nutesuparafrate\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FormGame.cs [Design]",
+              "DocumentMoniker": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\NuTeSuparaFrate\\Forms\\FormGame.cs",
+              "RelativeDocumentMoniker": "NuTeSuparaFrate\\Forms\\FormGame.cs",
+              "ToolTip": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\NuTeSuparaFrate\\Forms\\FormGame.cs [Design]",
+              "RelativeToolTip": "NuTeSuparaFrate\\Forms\\FormGame.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-10T20:16:43.492Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FormStart.cs [Design]",
+              "DocumentMoniker": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\NuTeSuparaFrate\\Forms\\FormStart.cs",
+              "RelativeDocumentMoniker": "NuTeSuparaFrate\\Forms\\FormStart.cs",
+              "ToolTip": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\NuTeSuparaFrate\\Forms\\FormStart.cs [Design]",
+              "RelativeToolTip": "NuTeSuparaFrate\\Forms\\FormStart.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-10T20:15:48.736Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FormGame.cs",
+              "DocumentMoniker": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\NuTeSuparaFrate\\Forms\\FormGame.cs",
+              "RelativeDocumentMoniker": "NuTeSuparaFrate\\Forms\\FormGame.cs",
+              "ToolTip": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\NuTeSuparaFrate\\Forms\\FormGame.cs",
+              "RelativeToolTip": "NuTeSuparaFrate\\Forms\\FormGame.cs",
+              "ViewState": "AgIAAOwAAAAAAAAAAAAkwAYBAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-11T09:44:30.268Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Model.cs",
+              "DocumentMoniker": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\NuTeSuparaFrate\\Model.cs",
+              "RelativeDocumentMoniker": "NuTeSuparaFrate\\Model.cs",
+              "ToolTip": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\NuTeSuparaFrate\\Model.cs",
+              "RelativeToolTip": "NuTeSuparaFrate\\Model.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMkAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-11T11:05:24.396Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "FormStart.cs",
+              "DocumentMoniker": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\NuTeSuparaFrate\\Forms\\FormStart.cs",
+              "RelativeDocumentMoniker": "NuTeSuparaFrate\\Forms\\FormStart.cs",
+              "ToolTip": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\NuTeSuparaFrate\\Forms\\FormStart.cs",
+              "RelativeToolTip": "NuTeSuparaFrate\\Forms\\FormStart.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAEIAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-11T09:17:38.82Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FormStart.Designer.cs",
+              "DocumentMoniker": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\NuTeSuparaFrate\\Forms\\FormStart.Designer.cs",
+              "RelativeDocumentMoniker": "NuTeSuparaFrate\\Forms\\FormStart.Designer.cs",
+              "ToolTip": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\NuTeSuparaFrate\\Forms\\FormStart.Designer.cs",
+              "RelativeToolTip": "NuTeSuparaFrate\\Forms\\FormStart.Designer.cs",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAvwGgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-11T09:12:57.028Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "NuTeSuparaFrate",
+              "DocumentMoniker": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\NuTeSuparaFrate\\NuTeSuparaFrate.csproj",
+              "RelativeDocumentMoniker": "NuTeSuparaFrate\\NuTeSuparaFrate.csproj",
+              "ToolTip": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\NuTeSuparaFrate\\NuTeSuparaFrate.csproj",
+              "RelativeToolTip": "NuTeSuparaFrate\\NuTeSuparaFrate.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-11T13:53:22.356Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "FormGame.Designer.cs",
+              "DocumentMoniker": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\NuTeSuparaFrate\\Forms\\FormGame.Designer.cs",
+              "RelativeDocumentMoniker": "NuTeSuparaFrate\\Forms\\FormGame.Designer.cs",
+              "ToolTip": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\NuTeSuparaFrate\\Forms\\FormGame.Designer.cs",
+              "RelativeToolTip": "NuTeSuparaFrate\\Forms\\FormGame.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-11T09:39:22.117Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\NuTeSuparaFrate\\Program.cs",
+              "RelativeDocumentMoniker": "NuTeSuparaFrate\\Program.cs",
+              "ToolTip": "C:\\FraceaRalucaMaria\\NuTeSuparaFrate\\NuTeSuparaFrate\\Program.cs",
+              "RelativeToolTip": "NuTeSuparaFrate\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-10T20:18:48.866Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

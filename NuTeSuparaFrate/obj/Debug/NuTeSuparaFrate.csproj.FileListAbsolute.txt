@@ -1,0 +1,12 @@
+C:\FraceaRalucaMaria\NuTeSuparaFrate\NuTeSuparaFrate\bin\Debug\NuTeSuparaFrate.exe.config
+C:\FraceaRalucaMaria\NuTeSuparaFrate\NuTeSuparaFrate\bin\Debug\NuTeSuparaFrate.exe
+C:\FraceaRalucaMaria\NuTeSuparaFrate\NuTeSuparaFrate\bin\Debug\NuTeSuparaFrate.pdb
+C:\FraceaRalucaMaria\NuTeSuparaFrate\NuTeSuparaFrate\obj\Debug\NuTeSuparaFrate.csproj.AssemblyReference.cache
+C:\FraceaRalucaMaria\NuTeSuparaFrate\NuTeSuparaFrate\obj\Debug\NuTeSuparaFrate.Forms.FormGame.resources
+C:\FraceaRalucaMaria\NuTeSuparaFrate\NuTeSuparaFrate\obj\Debug\NuTeSuparaFrate.Forms.FormStart.resources
+C:\FraceaRalucaMaria\NuTeSuparaFrate\NuTeSuparaFrate\obj\Debug\NuTeSuparaFrate.Properties.Resources.resources
+C:\FraceaRalucaMaria\NuTeSuparaFrate\NuTeSuparaFrate\obj\Debug\NuTeSuparaFrate.csproj.GenerateResource.cache
+C:\FraceaRalucaMaria\NuTeSuparaFrate\NuTeSuparaFrate\obj\Debug\NuTeSuparaFrate.csproj.CoreCompileInputs.cache
+C:\FraceaRalucaMaria\NuTeSuparaFrate\NuTeSuparaFrate\obj\Debug\NuTeSuparaFrate.exe
+C:\FraceaRalucaMaria\NuTeSuparaFrate\NuTeSuparaFrate\obj\Debug\NuTeSuparaFrate.pdb
+C:\FraceaRalucaMaria\NuTeSuparaFrate\NuTeSuparaFrate\obj\Debug\NuTeSuparaFrate.exe.config
