@@ -34,6 +34,7 @@ namespace NuTeSuparaFrate.Forms
             InitializePlayersGraphics();          
             UpdateBoard();
             ActualizeazaJucatorCurent();
+            PrioritizeCurrentPlayerTokens();
 
             btnRollDice.Enabled = true;
         }
@@ -326,6 +327,7 @@ namespace NuTeSuparaFrate.Forms
             if(mutareValida)
             {
                 UpdateBoard();
+                controlClicat.BringToFront();
                 int valoareZarFolosit = zarCurent;
                 zarCurent = 0;
 
@@ -338,6 +340,7 @@ namespace NuTeSuparaFrate.Forms
                 {
                     joc.TreciLaUrmatorulJucator();
                     ActualizeazaJucatorCurent();
+                    PrioritizeCurrentPlayerTokens();
                     btnRollDice.Enabled = true;
                 }
                 
@@ -369,14 +372,30 @@ namespace NuTeSuparaFrate.Forms
             lblJucatorCurent.ForeColor = culoareText;
         }
 
+        private void PrioritizeCurrentPlayerTokens()
+        {
+            Culoare culoareCurenta = joc.Jucatori[joc.IndexJucatorCurent].Culoare;
+            foreach(var pair in tokenMap)
+            {
+                Piesa piesa = pair.Key;
+                PictureBox token = pair.Value;
+
+                if(piesa.Culoare==culoareCurenta)
+                {
+                    token.BringToFront();
+                }
+            }
+        }
+
         private void UpdateBoard()
         {
             foreach(var pair in tokenMap)
             {
                 Piesa piesa = pair.Key;
                 PictureBox token = pair.Value;
+                token.BringToFront();
 
-                if(piesa.PozitieCurenta>=0 && piesa.PozitieCurenta < boardPositions.Count)
+                if (piesa.PozitieCurenta>=0 && piesa.PozitieCurenta < boardPositions.Count)
                 {
                     PunctTabla target = boardPositions[piesa.PozitieCurenta];
                     token.Left = target.X;
@@ -394,11 +413,11 @@ namespace NuTeSuparaFrate.Forms
                 {
                     token.Visible = false;
                 }
-                token.BringToFront();
+                
             }
         }
 
-        private void Token_MouseEnter(object sender, EventArgs e)
+        /*private void Token_MouseEnter(object sender, EventArgs e)
         {
             PictureBox token = (PictureBox)sender;
             Piesa piesa = (Piesa)token.Tag;
@@ -421,7 +440,7 @@ namespace NuTeSuparaFrate.Forms
             token.BorderStyle = BorderStyle.None;
             token.Size = new Size(P, P);
 
-        }
+        }*/
 
         private void label1_Click(object sender, EventArgs e)
         {

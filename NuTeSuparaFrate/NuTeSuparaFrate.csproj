@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Culoare.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,8 +65,9 @@
     <Compile Include="Forms\FormStart.Designer.cs">
       <DependentUpon>FormStart.cs</DependentUpon>
     </Compile>
-    <Compile Include="GameLogic.cs" />
-    <Compile Include="Model.cs" />
+    <Compile Include="Joc.cs" />
+    <Compile Include="Jucator.cs" />
+    <Compile Include="Piesa.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FormGame.resx">
