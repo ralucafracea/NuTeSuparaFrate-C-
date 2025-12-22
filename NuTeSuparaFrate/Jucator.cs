@@ -25,16 +25,28 @@ namespace NuTeSuparaFrate
                 Piese[i] = new Piesa(culoare);
             }
         }
+        public abstract void JoacaRandul(int valoareZar);
 
     }
 
-    public class JucatorUman : Jucator
+    public class JucatorLocal : Jucator
     {
-        public JucatorUman(Culoare culoare) : base(culoare) { }
+        public JucatorLocal(Culoare culoare) : base(culoare) { }
+
+        public override void JoacaRandul(int valoareZar)
+        {
+            // Aici vei activa logica de click pe pionii tăi
+            // (Vei face PictureBox-urile clicabile)
+        }
     }
 
     public class JucatorRetea : Jucator
     {
         public JucatorRetea(Culoare culoare) : base(culoare) { }
+        public override void JoacaRandul(int valoareZar)
+        {
+            // Aici nu faci nimic cu mouse-ul. 
+            // Aștepți pachetul de date prin TCP.
+        }
     }
 }

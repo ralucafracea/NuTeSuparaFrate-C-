@@ -2,25 +2,16 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using NuTeSuparaFrate.Properties;
-using NuTeSuparaFrate;
-using System.Linq;
-using System.Runtime.Remoting.Channels;
 namespace NuTeSuparaFrate.Forms
 {
-    public struct PunctTabla
-    {
-        public int X { get; set; }
-        public int Y { get; set; }
-    }
+    
 
     public partial class FormGame : Form
     {
         private Joc joc;
-        private List<PunctTabla> boardPositions = new List<PunctTabla>();
+        
         private Dictionary<Piesa, PictureBox> tokenMap = new Dictionary<Piesa, PictureBox>();
         private int zarCurent = 0;
-        private Dictionary<Culoare, PunctTabla> baseMap = new Dictionary<Culoare, PunctTabla>();
         private int P;
         
         public FormGame(List<Culoare> culoriJoc, Culoare culoareLocal)
@@ -28,119 +19,16 @@ namespace NuTeSuparaFrate.Forms
             InitializeComponent();
             pbBoard.BringToFront();
             InitializeBoardBackground();
+
             joc = new Joc(culoriJoc,culoareLocal);
+
             pbBoard_SizeChanged(null, null);
-            InitializeBaseMap();
-            InitializePlayersGraphics();          
+            
+                      
             UpdateBoard();
             ActualizeazaJucatorCurent();
             PrioritizeCurrentPlayerTokens();
-
             btnRollDice.Enabled = true;
-        }
-
-        private void GenerateBoardPositions()
-        {
-            if (P == 0)
-                return;
-
-            boardPositions.Clear();
-
-            boardPositions.Clear();
-            //rosu
-            boardPositions.Add(new PunctTabla { X = 1 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 2 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 3 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 4 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 5 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 5 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 4 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 3 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 2 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 1 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 0 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 0 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 0 * P });
-
-            //verde
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 1 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 2 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 3 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 4 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 5 * P });
-            boardPositions.Add(new PunctTabla { X = 9 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 10 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 11 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 12 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 13 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 14 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 14 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 14 * P, Y = 8 * P });
-
-            //galben
-            boardPositions.Add(new PunctTabla { X = 13 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 12 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 11 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 10 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 9 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 9 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 10 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 11 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 12 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 13 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 14 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 14 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 14 * P });
-
-            //albastru
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 13 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 12 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 11 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 10 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 9 * P });
-            boardPositions.Add(new PunctTabla { X = 5 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 4 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 3 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 2 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 1 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 0 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 0 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 0 * P, Y = 6 * P });
-
-
-            //rosu home
-            boardPositions.Add(new PunctTabla { X = 1 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 2 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 3 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 4 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 5 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 7 * P });
-
-            //verde home
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 1 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 2 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 3 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 4 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 5 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 6 * P });
-
-            //galben home
-            boardPositions.Add(new PunctTabla { X = 13 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 12 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 11 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 10 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 9 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 7 * P });
-
-            //albastru home
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 13 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 12 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 11 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 10 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 9 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 8 * P });
-
-
         }
 
 
@@ -149,73 +37,17 @@ namespace NuTeSuparaFrate.Forms
             if (pbBoard.Width > 0 && pbBoard.Height > 0)
             {
                 P = pbBoard.Width / 15;
-                GenerateBoardPositions();
-                UpdateBoard();
-
-                InitializeBaseMap();
+                joc.InitializeazaHarta(P);
+                UpdateBoard();         
                 InitializePlayersGraphics();
             }
         }
 
-        private void InitializeBaseMap()
-        {
-            int P_val =(P==0)? 30:P;
-            baseMap.Clear();
-            baseMap.Add(Culoare.Rosu, new PunctTabla { X = 0, Y = 0 });
-            baseMap.Add(Culoare.Verde, new PunctTabla { X = 9 * P_val, Y = 0 });
-            baseMap.Add(Culoare.Albastru, new PunctTabla { X = 0, Y = 9 * P_val });
-            baseMap.Add(Culoare.Galben, new PunctTabla { X = 9 * P_val, Y = 9 * P_val });
-
-        }
-
-
         private Point GetBasePosition(Piesa piesa)
         {
-            IJucator jucator = joc.Jucatori.FirstOrDefault(j => j.Culoare == piesa.Culoare);
+            return joc.DeterminaPozitieVizuala(piesa);
+        } 
 
-            if (jucator == null) return new Point(0, 0);
-
-            int piesaIndex = -1;
-            for(int i=0;i<jucator.Piese.Length;i++)
-            {
-                if (jucator.Piese[i]==piesa)
-                {
-                    piesaIndex = i;
-                    break;
-                }
-            }
-            if (piesaIndex == -1)
-                return new Point(0, 0);
-
-
-            PunctTabla baseStart = baseMap[piesa.Culoare];
-
-            
-            int pionSize = P;
-            int Boffset = 90; //distanta intre pioni
-            int Bpadding = 45;
-            double scalareFactor = (double)P / 30.0;
-            int offset = (int)(Boffset * scalareFactor);
-            int paddingX = (int)(Bpadding * scalareFactor);
-            int paddingY = (int)(Bpadding * scalareFactor);
-
-            int col = piesaIndex % 2;
-            int row = piesaIndex / 2;
-
-            int finalX=baseStart.X+paddingX+col*offset;
-            int finalY = baseStart.Y + paddingY + row * offset;
-
-            if (row == 0) finalY += (int)(5 * scalareFactor);
-            if (row == 1) finalY -= (int)(5 * scalareFactor);
-            if (col == 0) finalX += (int)(5 * scalareFactor);
-            if (col == 1) finalX -= (int)(5 * scalareFactor);
-
-            // Offset universal (pentru a compensa marginea)
-            finalX -= (int)(5 * scalareFactor);
-            finalY -= (int)(5 * scalareFactor);
-
-            return new Point(finalX - (pionSize / 2), finalY - (pionSize / 2));
-        }
 
         private void InitializeBoardBackground()
         {
@@ -226,18 +58,12 @@ namespace NuTeSuparaFrate.Forms
 
         private void InitializePlayersGraphics()
         {
-            List<Control> controlsToRemove = new List<Control>();
-            foreach(Control control in pbBoard.Controls)
+            
+            foreach(var pb in tokenMap.Values)
             {
-                if(control is PictureBox && control.Tag is Piesa)
-                    controlsToRemove.Add(control);
+                pbBoard.Controls.Remove(pb);
+                pb.Dispose();
             }
-            foreach(Control control in controlsToRemove)
-            {
-                pbBoard.Controls.Remove(control);
-                control.Dispose();
-            }
-
             tokenMap.Clear();
 
             foreach(var jucator in joc.Jucatori)
@@ -253,17 +79,9 @@ namespace NuTeSuparaFrate.Forms
                     token.Parent = pbBoard;
                     token.Tag = piesa;
 
-                    Point basePos = GetBasePosition(piesa);
-                    token.Left = basePos.X;
-                    token.Top= basePos.Y;
-
                     token.Click += Token_Click;
-                   
-                    token.BringToFront();
                     tokenMap.Add(piesa, token);
-                    pbBoard.Controls.Add(token);
-
-                    
+                    pbBoard.Controls.Add(token);              
                 }
             }       
         }
@@ -309,31 +127,29 @@ namespace NuTeSuparaFrate.Forms
         {
             if(zarCurent==0)
             {
-                MessageBox.Show("Arunca zarul mai intai!");
+                MessageBox.Show("Arunca zarul!");
                 return;
             }
 
-            PictureBox controlClicat=(PictureBox)sender;
-            Piesa piesaSelectata = (Piesa)controlClicat.Tag;
+            PictureBox controlClk=(PictureBox)sender;
+            Piesa piesaS = (Piesa)controlClk.Tag;
 
-            if(piesaSelectata.Culoare != joc.Jucatori[joc.IndexJucatorCurent].Culoare)
+            if(!joc.EsteRandulJucatorului(piesaS.Culoare))
             {
                 MessageBox.Show("Nu e randul tau!");
                 return;
             }
 
-            bool mutareValida = joc.IncearcaMutare(piesaSelectata, zarCurent);
-            
-            if(mutareValida)
+            int valoareZarCurent = zarCurent;
+
+            if(joc.IncearcaMutare(piesaS, zarCurent))
             {
                 UpdateBoard();
-                controlClicat.BringToFront();
-                int valoareZarFolosit = zarCurent;
                 zarCurent = 0;
 
-                if(valoareZarFolosit==6)
+                if (valoareZarCurent == 6)
                 {
-                    MessageBox.Show("Ai dat6! Arunca din nou.");
+                    MessageBox.Show("Ai dat 6 ! Arunca din nou.");
                     btnRollDice.Enabled = true;
                 }
                 else
@@ -343,13 +159,11 @@ namespace NuTeSuparaFrate.Forms
                     PrioritizeCurrentPlayerTokens();
                     btnRollDice.Enabled = true;
                 }
-                
-
             }
             else
             {
                 MessageBox.Show("Mutare invalida! Incearca cu o alta piesa sau apasa pe zar daca nu poti muta.");
-            }
+            }       
             
         }
 
@@ -393,25 +207,18 @@ namespace NuTeSuparaFrate.Forms
             {
                 Piesa piesa = pair.Key;
                 PictureBox token = pair.Value;
-                token.BringToFront();
 
-                if (piesa.PozitieCurenta>=0 && piesa.PozitieCurenta < boardPositions.Count)
-                {
-                    PunctTabla target = boardPositions[piesa.PozitieCurenta];
-                    token.Left = target.X;
-                    token.Top = target.Y;
-                    token.Visible = true;
-                }
-                else if(piesa.EsteInBaza)
-                {
-                    Point basePos = GetBasePosition(piesa);
-                    token.Left = basePos.X;
-                    token.Top = basePos.Y;
-                    token.Visible = true;
-                }
-                else if(piesa.EsteLaFinal)
+                Point coord = joc.DeterminaPozitieVizuala(piesa);
+
+                if(coord==Point.Empty)
                 {
                     token.Visible = false;
+                }
+                else
+                {
+                    token.Location = coord;
+                    token.Visible = true;
+                    token.BringToFront();
                 }
                 
             }
@@ -450,6 +257,10 @@ namespace NuTeSuparaFrate.Forms
         private void FormGame_Load(object sender, EventArgs e)
         {
 
+        }
+        private void FormGame_FormClosed_1(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

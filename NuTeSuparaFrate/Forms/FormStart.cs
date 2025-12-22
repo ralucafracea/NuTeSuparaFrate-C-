@@ -12,7 +12,7 @@ namespace NuTeSuparaFrate.Forms
 {
     public partial class FormStart : Form
     {
-        private FormGame jocForm;
+        public FormGame jocForm;
         public FormStart()
         {
             InitializeComponent();
@@ -52,7 +52,7 @@ namespace NuTeSuparaFrate.Forms
 
             if (!culoriAlese.Contains(culoareLocal))
             {
-                MessageBox.Show("Trebuie sa incluzi culoarea {culoareLocal} in selectia de jucatori");
+                MessageBox.Show($"Trebuie sa incluzi culoarea {culoareLocal} in selectia de jucatori");
                 return;
             }
 
@@ -64,7 +64,7 @@ namespace NuTeSuparaFrate.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Eroare la pornirea jocului: {ex.Message}");
+                MessageBox.Show($"Eroare la pornirea jocului: {ex.Message}");
 
             }
         }
@@ -73,9 +73,5 @@ namespace NuTeSuparaFrate.Forms
         {
             Application.Exit();
         }
-
-        
-
-      
     }
 }

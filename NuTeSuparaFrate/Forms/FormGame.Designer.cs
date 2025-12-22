@@ -25,7 +25,9 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.pbBoard = new System.Windows.Forms.PictureBox();
             this.lblJucatorCurent = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbBoard)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // btnRollDice
@@ -53,9 +55,10 @@
             this.pbBoard.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbBoard.Image = global::NuTeSuparaFrate.Properties.Resources.LudoBoard;
             this.pbBoard.Location = new System.Drawing.Point(12, 3);
             this.pbBoard.Name = "pbBoard";
-            this.pbBoard.Size = new System.Drawing.Size(663, 648);
+            this.pbBoard.Size = new System.Drawing.Size(660, 660);
             this.pbBoard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbBoard.TabIndex = 2;
             this.pbBoard.TabStop = false;
@@ -70,11 +73,20 @@
             this.lblJucatorCurent.Text = "Jucator Curent";
             this.lblJucatorCurent.Click += new System.EventHandler(this.label1_Click);
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(801, 476);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox2.TabIndex = 5;
+            this.pictureBox2.TabStop = false;
+            // 
             // FormGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1022, 653);
+            this.ClientSize = new System.Drawing.Size(1032, 653);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.lblJucatorCurent);
             this.Controls.Add(this.pbBoard);
             this.Controls.Add(this.lblStatus);
@@ -82,8 +94,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormGame";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormGame_FormClosed_1);
             this.Load += new System.EventHandler(this.FormGame_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbBoard)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -95,5 +109,6 @@
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.PictureBox pbBoard;
         private System.Windows.Forms.Label lblJucatorCurent;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

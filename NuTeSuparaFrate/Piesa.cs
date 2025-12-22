@@ -11,23 +11,25 @@ namespace NuTeSuparaFrate
         public Culoare Culoare { get; }
         public int PozitieCurenta { get; private set; } = -1;
         public bool EsteInBaza => PozitieCurenta == -1;
-        public bool EsteLaFinal { get; private set; } = false;
+        public bool EsteLaFinal { get; set; } = false;
+        public int PasiParcursi { get; set; } = 0;
 
         public Piesa(Culoare culoare)
         {
             this.Culoare = culoare;
         }
 
-        public void Muta(int nouaPozitie)
+        public void Muta(int nouaPozitie,int pasiEfectuati)
         {
-            if (nouaPozitie == 58)
+            this.PozitieCurenta = nouaPozitie;
+            this.PasiParcursi = pasiEfectuati;
+
+            if (pasiEfectuati>=57)
             {
                 this.EsteLaFinal = true;
-                this.PozitieCurenta = nouaPozitie;
             }
             else
             {
-                this.PozitieCurenta = nouaPozitie;
                 this.EsteLaFinal = false;
             }
         }
@@ -35,6 +37,7 @@ namespace NuTeSuparaFrate
         public void TrimiteInBaza()
         {
             this.PozitieCurenta = -1;
+            this.PasiParcursi = 0;
             this.EsteLaFinal = false;
         }
     }

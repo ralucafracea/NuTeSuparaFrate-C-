@@ -138,6 +138,7 @@
             this.Controls.Add(this.btnStartGame);
             this.Name = "FormStart";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormStart_FormClosed);
             this.Load += new System.EventHandler(this.FormStart_Load);
             this.gbJucatori.ResumeLayout(false);
             this.gbJucatori.PerformLayout();
