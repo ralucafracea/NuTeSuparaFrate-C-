@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace NuTeSuparaFrate
 {
-    public class Jucator 
+    public abstract class Jucator 
     {
         public Culoare Culoare { get; }
         public Piesa[] Piese { get; }
@@ -18,6 +18,10 @@ namespace NuTeSuparaFrate
             {
                 Piese[i] = new Piesa(culoare,i);
             }
+        }
+        public virtual int AjusteazaValoareZar(int valoareInitiala)
+        {
+            return valoareInitiala;
         }
 
         public bool JocFinalizat()
@@ -48,6 +52,23 @@ namespace NuTeSuparaFrate
                 return valoareZar == 6;
 
             return (piesa.PasiParcursi + valoareZar <= 57);
+        }
+    }
+
+    public class JucatorStandard : Jucator
+    {
+        public JucatorStandard(Culoare culoare) : base(culoare) { }
+ 
+    }
+
+    public class JucatorNorocos : Jucator
+    {
+        public JucatorNorocos(Culoare culoare) : base(culoare) { }
+        public override int AjusteazaValoareZar(int valoareInitiala)
+        {
+            if (valoareInitiala>1 && valoareInitiala < 5)
+                return valoareInitiala + 1;
+            return valoareInitiala;
         }
     }
 

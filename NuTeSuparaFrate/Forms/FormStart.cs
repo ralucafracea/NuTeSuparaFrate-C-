@@ -40,7 +40,7 @@ namespace NuTeSuparaFrate.Forms
                 MessageBox.Show("Jocul necesita minim 2 jucatori. Selecteaza cel putin 2 culori!");
                 return;
             }
-            Culoare culoareLocal = (Culoare)cbCuloare.SelectedItem; ;
+            Culoare culoareLocal = (Culoare)cbCuloare.SelectedItem; 
             bool participa = false;
 
             foreach(var c in culoriAlese)
@@ -57,7 +57,7 @@ namespace NuTeSuparaFrate.Forms
 
             try
             {
-                jocForm = new FormGame(culoriAlese, culoareLocal);
+                jocForm = new FormGame(culoriAlese);
                 jocForm.Show();
                 this.Hide();
             }

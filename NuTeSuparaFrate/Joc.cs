@@ -16,7 +16,7 @@ namespace NuTeSuparaFrate
     }
     public class Joc
     {
-        public List<Jucator> Jucatori { get; }
+        public List<Jucator> Jucatori { get; set; }
         public int IndexJucatorCurent { get; private set; } = 0;
         private Random random = new Random();
         private List<PunctTabla> boardPositions = new List<PunctTabla>();
@@ -27,10 +27,21 @@ namespace NuTeSuparaFrate
         public Joc(List<Culoare> culoriParticipante)
         {
             Jucatori = new List<Jucator>();
+            Random rndm = new Random();
+            int indexNorocos=rndm.Next(culoriParticipante.Count);
 
-            foreach (Culoare culoareCurenta in culoriParticipante)
+            for(int i=0;i<culoriParticipante.Count;i++)
             {
-                Jucatori.Add(new Jucator(culoareCurenta));
+                Culoare culoareCurenta=culoriParticipante[i];
+
+                if(i==indexNorocos)
+                {
+                    Jucatori.Add(new JucatorNorocos(culoareCurenta));
+                }
+                else
+                {
+                    Jucatori.Add(new JucatorStandard(culoareCurenta));
+                }
             }
 
         }
