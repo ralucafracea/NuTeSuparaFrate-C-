@@ -4,40 +4,45 @@ using System.Drawing;
 using System.Windows.Forms;
 namespace NuTeSuparaFrate.Forms
 {
-    
-
     public partial class FormGame : Form
     {
-        private Joc joc;
-        
+        private Joc joc;   
         private Dictionary<Piesa, PictureBox> tokenMap = new Dictionary<Piesa, PictureBox>();
         private int zarCurent = 0;
         private int P;
+
         
         public FormGame(List<Culoare> culoriJoc, Culoare culoareLocal)
         {
             InitializeComponent();
-            pbBoard.BringToFront();
             InitializeBoardBackground();
+            pbBoard.BringToFront();
+            if(pbBoard.Width > 0) 
+                P = pbBoard.Width / 15;
+            else
+                P = 40;
 
-            joc = new Joc(culoriJoc,culoareLocal);
+            joc = new Joc(culoriJoc);
+            joc.InitializeazaHarta(P);
+            joc.InitializeazaPozitiiBaza(P);
 
-            pbBoard_SizeChanged(null, null);
-            
-                      
+            InitializePlayersGraphics();
             UpdateBoard();
+            pbBoard_SizeChanged(null, null);
             ActualizeazaJucatorCurent();
-            PrioritizeCurrentPlayerTokens();
             btnRollDice.Enabled = true;
+            pbZar.Image = Properties.Resources.Dice_Default;
+            lblStatus.Text = "Bine ati venit!";
+
+            
         }
-
-
         private void pbBoard_SizeChanged(object sender, EventArgs e)
         {
-            if (pbBoard.Width > 0 && pbBoard.Height > 0)
+            if (joc!=null && pbBoard.Width > 0 && pbBoard.Height > 0)
             {
                 P = pbBoard.Width / 15;
                 joc.InitializeazaHarta(P);
+                joc.InitializeazaPozitiiBaza(P);
                 UpdateBoard();         
                 InitializePlayersGraphics();
             }
@@ -47,13 +52,11 @@ namespace NuTeSuparaFrate.Forms
         {
             return joc.DeterminaPozitieVizuala(piesa);
         } 
-
-
         private void InitializeBoardBackground()
         {
             pbBoard.Image = Properties.Resources.LudoBoard;
             pbBoard.SizeMode = PictureBoxSizeMode.StretchImage;
-            //pbBoard.Enabled = false;
+            
         }     
 
         private void InitializePlayersGraphics()
@@ -73,19 +76,20 @@ namespace NuTeSuparaFrate.Forms
                     PictureBox token = new PictureBox();
                     token.Width = P;
                     token.Height = P;
+                    token.Parent = pbBoard;
                     token.BackColor = Color.Transparent;
                     token.SizeMode = PictureBoxSizeMode.StretchImage;
                     token.Image = GetTokenImage(jucator.Culoare);
-                    token.Parent = pbBoard;
+                    Point pozitieLogica= joc.DeterminaPozitieVizuala(piesa);
+                    token.Location = new Point(pozitieLogica.X - pbBoard.Location.X, pozitieLogica.Y - pbBoard.Location.Y);
                     token.Tag = piesa;
-
                     token.Click += Token_Click;
                     tokenMap.Add(piesa, token);
-                    pbBoard.Controls.Add(token);              
+                               
                 }
             }       
         }
-
+ 
         private Image GetTokenImage(Culoare culoare)
         {
             switch(culoare)
@@ -108,14 +112,29 @@ namespace NuTeSuparaFrate.Forms
             }
 
             zarCurent = joc.AruncaZar();
-            MessageBox.Show($"Jucatorul {joc.Jucatori[joc.IndexJucatorCurent].Culoare} a dat {zarCurent}");
-            if(joc.ExistaMutariValide(zarCurent))
+            pbZar.Image = GetDiceImage(zarCurent);
+
+            var jucatorCrt = joc.Jucatori[joc.IndexJucatorCurent];
+
+            if(joc.SaseConsecutiv(zarCurent))
+            {
+                lblStatus.Text = "3 de 6 consecutivi! Ai pierdut randul.";
+                zarCurent = 0;
+                ActualizeazaJucatorCurent();
+                btnRollDice.Enabled = true;
+                return;
+            }
+
+            if (joc.ExistaMutariValide(zarCurent))
             {
                 btnRollDice.Enabled = false;
+
+                lblStatus.Text = $"{jucatorCrt.Culoare}: Alege o piesa!";
             }
             else
             {
-                MessageBox.Show($"Nu poti muta nicio piesa cu {zarCurent}.");
+
+                lblStatus.Text = $"Nicio mutare pentru {jucatorCrt.Culoare} zarul cu {zarCurent}";
                 joc.TreciLaUrmatorulJucator();
                 zarCurent = 0;
                 ActualizeazaJucatorCurent();
@@ -127,7 +146,7 @@ namespace NuTeSuparaFrate.Forms
         {
             if(zarCurent==0)
             {
-                MessageBox.Show("Arunca zarul!");
+                lblStatus.Text = "Arunca zarul!";
                 return;
             }
 
@@ -146,23 +165,33 @@ namespace NuTeSuparaFrate.Forms
             {
                 UpdateBoard();
                 zarCurent = 0;
+                
+
+                var castigator = joc.VerificaCastigator();
+                if(castigator!=null)
+                {
+                    MessageBox.Show($"FELICITARI! Jucatorul {castigator.Culoare} a castigat jocul!");
+                    this.Close();
+                    return;
+                }
 
                 if (valoareZarCurent == 6)
                 {
-                    MessageBox.Show("Ai dat 6 ! Arunca din nou.");
+                    lblStatus.Text= "Ai dat 6! Mai da o data";
                     btnRollDice.Enabled = true;
                 }
                 else
                 {
-                    joc.TreciLaUrmatorulJucator();
+                    joc.TreciLaUrmatorulJucator();      
                     ActualizeazaJucatorCurent();
-                    PrioritizeCurrentPlayerTokens();
+                    lblStatus.Text = "Arunca zarul!";
                     btnRollDice.Enabled = true;
                 }
+                PrioritizeCurrentPlayerTokens();
             }
             else
             {
-                MessageBox.Show("Mutare invalida! Incearca cu o alta piesa sau apasa pe zar daca nu poti muta.");
+                lblStatus.Text = "Mutare invalida! Incearca cu o alta piesa sau apasa pe zar daca nu poti muta.";
             }       
             
         }
@@ -172,7 +201,7 @@ namespace NuTeSuparaFrate.Forms
             var jucator = joc.Jucatori[joc.IndexJucatorCurent];
             string culoare = jucator.Culoare.ToString();
 
-            lblJucatorCurent.Text = $"Randul: {culoare}";
+            lblJucatorCurent.Text = $"Urmatorul: {culoare}";
 
             Color culoareText = Color.Black;
             switch(jucator.Culoare)
@@ -184,6 +213,8 @@ namespace NuTeSuparaFrate.Forms
             }
 
             lblJucatorCurent.ForeColor = culoareText;
+            btnRollDice.BackColor = culoareText;
+            
         }
 
         private void PrioritizeCurrentPlayerTokens()
@@ -210,9 +241,10 @@ namespace NuTeSuparaFrate.Forms
 
                 Point coord = joc.DeterminaPozitieVizuala(piesa);
 
-                if(coord==Point.Empty)
+                if(coord==Point.Empty || piesa.EsteLaFinal)
                 {
                     token.Visible = false;
+                    token.Location = new Point(-100, -100);
                 }
                 else
                 {
@@ -222,38 +254,27 @@ namespace NuTeSuparaFrate.Forms
                 }
                 
             }
+            pbBoard.Update();
         }
 
-        /*private void Token_MouseEnter(object sender, EventArgs e)
+        private Image GetDiceImage(int valoare)
         {
-            PictureBox token = (PictureBox)sender;
-            Piesa piesa = (Piesa)token.Tag;
-
-            if (zarCurent!=0 && piesa.Culoare == joc.Jucatori[joc.IndexJucatorCurent].Culoare)
+            switch (valoare)
             {
-                token.Cursor = Cursors.Hand;
-                token.BorderStyle = BorderStyle.FixedSingle;
-                token.Size = new Size(P + 5, P + 5);
-            }
-            else
-            {
-                token.Cursor = Cursors.Default;
+                case 1: return Properties.Resources.Dice_1;
+                case 2: return Properties.Resources.Dice_2;
+                case 3: return Properties.Resources.Dice_3;
+                case 4: return Properties.Resources.Dice_4;
+                case 5: return Properties.Resources.Dice_5;
+                case 6: return Properties.Resources.Dice_6;
+                default: return null;
             }
         }
-
-        private void Token_MouseLeave(object sender, EventArgs e)
-        {
-            PictureBox token = (PictureBox)sender;
-            token.BorderStyle = BorderStyle.None;
-            token.Size = new Size(P, P);
-
-        }*/
 
         private void label1_Click(object sender, EventArgs e)
         {
 
         }
-
         private void FormGame_Load(object sender, EventArgs e)
         {
 
@@ -261,6 +282,16 @@ namespace NuTeSuparaFrate.Forms
         private void FormGame_FormClosed_1(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void pbBoard_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormGame_SizeChanged(object sender, EventArgs e)
+        {
+            pbBoard_SizeChanged(null, null);
         }
     }
 }

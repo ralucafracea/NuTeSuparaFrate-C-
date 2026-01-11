@@ -1,10 +1,11 @@
 ﻿using NuTeSuparaFrate.Forms;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace NuTeSuparaFrate
 {
@@ -15,11 +16,24 @@ namespace NuTeSuparaFrate
     }
     public class Joc
     {
-        public List<IJucator> Jucatori { get; }
+        public List<Jucator> Jucatori { get; }
         public int IndexJucatorCurent { get; private set; } = 0;
         private Random random = new Random();
         private List<PunctTabla> boardPositions = new List<PunctTabla>();
+        private Dictionary<Culoare, Point[]> BasePositionsAbsolute = new Dictionary<Culoare, Point[]>();
+        public int numarSaseConsecutiv = 0;
         public int ValoareZar { get; private set; }
+
+        public Joc(List<Culoare> culoriParticipante)
+        {
+            Jucatori = new List<Jucator>();
+
+            foreach (Culoare culoareCurenta in culoriParticipante)
+            {
+                Jucatori.Add(new Jucator(culoareCurenta));
+            }
+
+        }
 
         private readonly Dictionary<Culoare, int> PunctStartGlobal = new Dictionary<Culoare, int>
         {
@@ -27,14 +41,6 @@ namespace NuTeSuparaFrate
             {Culoare.Verde, 13 },
             {Culoare.Galben,26 },
             {Culoare.Albastru,39 }
-        };
-
-        private readonly Dictionary<Culoare, int> PunctIntrareHome = new Dictionary<Culoare, int>
-        {
-            {Culoare.Rosu,51 },
-            {Culoare.Verde,10 },
-            {Culoare.Galben, 23 },
-            {Culoare.Albastru, 36 }
         };
 
         private readonly int[] PozitiiSigure = { 0, 8, 13, 21, 26, 34, 39, 47 };
@@ -45,150 +51,118 @@ namespace NuTeSuparaFrate
                 return;
 
             boardPositions.Clear();
-            //rosu
-            boardPositions.Add(new PunctTabla { X = 1 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 2 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 3 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 4 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 5 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 5 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 4 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 3 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 2 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 1 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 0 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 0 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 0 * P });
 
-            //verde
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 1 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 2 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 3 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 4 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 5 * P });
-            boardPositions.Add(new PunctTabla { X = 9 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 10 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 11 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 12 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 13 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 14 * P, Y = 6 * P });
-            boardPositions.Add(new PunctTabla { X = 14 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 14 * P, Y = 8 * P });
-
-            //galben
-            boardPositions.Add(new PunctTabla { X = 13 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 12 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 11 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 10 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 9 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 9 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 10 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 11 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 12 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 13 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 14 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 14 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 14 * P });
-
-            //albastru
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 13 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 12 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 11 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 10 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 9 * P });
-            boardPositions.Add(new PunctTabla { X = 5 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 4 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 3 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 2 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 1 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 0 * P, Y = 8 * P });
-            boardPositions.Add(new PunctTabla { X = 0 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 0 * P, Y = 6 * P });
-
-
-            //rosu home
-            boardPositions.Add(new PunctTabla { X = 1 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 2 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 3 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 4 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 5 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 6 * P, Y = 7 * P });
-
-            //verde home
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 1 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 2 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 3 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 4 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 5 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 6 * P });
-
-            //galben home
-            boardPositions.Add(new PunctTabla { X = 13 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 12 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 11 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 10 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 9 * P, Y = 7 * P });
-            boardPositions.Add(new PunctTabla { X = 8 * P, Y = 7 * P });
-
-            //albastru home
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 13 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 12 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 11 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 10 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 9 * P });
-            boardPositions.Add(new PunctTabla { X = 7 * P, Y = 8 * P });
-        }
-
-        private readonly Dictionary<Culoare, Point[]> BasePositionsAbsolute = new Dictionary<Culoare, Point[]>
-        {
-            { Culoare.Rosu, new Point[]
-                {
-                    new Point(53, 55),
-                    new Point(110, 55),
-                    new Point(53, 115),
-                    new Point(110, 115)
-                }
-            },
-            { Culoare.Verde, new Point[]
-                {
-                    new Point(348, 55),
-                    new Point(413, 55),
-                    new Point(348, 115),
-                    new Point(413, 115)
-                }
-            },
-
-            { Culoare.Albastru, new Point[]
-                {
-                    new Point(53, 375),
-                    new Point(110, 375),
-                    new Point(53, 440),
-                    new Point(110, 440)
-                }
-            },
-            { Culoare.Galben, new Point[]
-                {
-                    new Point(348, 375),
-                    new Point(413, 375),
-                    new Point(348, 440),
-                    new Point(413, 440)
-                }
-            }
-        };
-
-        public Joc(List<Culoare> culoriParticipante, Culoare culoareJucatorLocal)
-        {
-            Jucatori = new List<IJucator>();
-
-            foreach (Culoare culoareCurenta in culoriParticipante)
+            int[,] traseuMatrice = new int[,]
             {
-                if (culoareCurenta == culoareJucatorLocal)
-                    Jucatori.Add(new JucatorLocal(culoareCurenta));
-                else
-                    Jucatori.Add(new JucatorRetea(culoareCurenta));
+                {1,6},{2,6},{3,6},{4,6},{5,6},//r
+                {6,5},{6,4},{6,3},{6,2},{6,1},{6,0},//v
+                {7,0}, {8,0}, //v
+                {8,1}, {8,2}, {8,3}, {8,4}, {8,5},//v
+                {9,6}, {10,6}, {11,6}, {12,6}, {13,6}, {14,6},//g
+                {14,7}, {14,8}, //g
+                {13,8}, {12,8}, {11,8}, {10,8}, {9,8}, //g
+                {8,10}, {8,11}, {8,12}, {8,13}, {8,14}, {8,15},//a
+                {7,15}, {6,15}, //a
+                {6,14}, {6,13}, {6,12}, {6,11}, {6,10}, //a
+                {5,8}, {4,8}, {3,8}, {2,8}, {1,8}, {0,8}, //r
+                {0,7},{0,6}//r
+            };
+
+            for(int i=0;i<traseuMatrice.GetLength(0);i++)
+            {
+                int x = traseuMatrice[i, 0];
+                int y = traseuMatrice[i, 1];
+
+                int coordX = x * P;
+                int coordY = y * P;
+
+                if (y >= 2 && y <= 7) coordY += 7;
+                else if (y == 8) coordY += 18;
+                else if (y == 9) coordY -= 15;
+                else coordY -= 2;
+
+                    boardPositions.Add(new PunctTabla { X = coordX, Y = coordY });
             }
 
+            AdaugaHomePath(P);
+
+            
         }
+
+        private void AdaugaHomePath(int P)
+        {
+            int[,] homeRosu = new int[,] 
+            { 
+                { 1, 7 }, { 2, 7 }, { 3, 7 }, { 4, 7 }, { 5, 7 }, { 6, 7 } 
+            };
+            for (int i = 0; i < 6; i++)
+                boardPositions.Add(new PunctTabla { X = homeRosu[i, 0] * P, Y = homeRosu[i, 1] * P + 8 });
+
+            int[,] homeVerde = new int[,] 
+            { 
+                { 7, 1 }, { 7, 2 }, { 7, 3 }, { 7, 4 }, { 7, 5 }, { 7, 6 } 
+            };
+            for (int i = 0; i < 6; i++)
+                boardPositions.Add(new PunctTabla { X = homeVerde[i, 0] * P, Y = homeVerde[i, 1] * P });
+
+            int[,] homeGalben = new int[,] 
+            { 
+                { 13, 7 }, { 12, 7 }, { 11, 7 }, { 10, 7 }, { 9, 7 }, { 8, 7 } 
+            };
+            for (int i = 0; i < 6; i++)
+                boardPositions.Add(new PunctTabla { X = homeGalben[i, 0] * P, Y = homeGalben[i, 1] * P + 8 });
+
+            int[,] homeAlbastru = new int[,] 
+            { 
+                { 7, 14 }, { 7, 13 }, { 7, 12 }, { 7, 11 }, { 7, 10 }, { 7, 9 } 
+            };
+            for (int i = 0; i < 6; i++)
+            {
+                if (homeAlbastru[i, 1] <= 10)
+                    boardPositions.Add(new PunctTabla { X = homeAlbastru[i, 0] * P, Y = homeAlbastru[i, 1] * P -10});
+                else
+                    boardPositions.Add(new PunctTabla { X = homeAlbastru[i, 0] * P, Y = homeAlbastru[i, 1] * P });
+            }
+        }
+
+        public void InitializeazaPozitiiBaza(int P)
+        {
+            BasePositionsAbsolute.Clear();
+
+            BasePositionsAbsolute[Culoare.Rosu] = new Point[]
+            {      
+                new Point(53, 55),
+                new Point(110, 55),
+                new Point(53, 115),
+                new Point(110, 115)
+            };
+
+            BasePositionsAbsolute[Culoare.Verde] = new Point[]
+            {
+                new Point(350, 55),
+                new Point(410, 55),
+                new Point(350, 115),
+                new Point(410, 115)
+            };
+
+            BasePositionsAbsolute[Culoare.Galben] = new Point[]
+            {
+               new Point(350, 375),
+               new Point(410, 375),
+               new Point(350, 440),
+               new Point(410, 440)
+            };
+
+            BasePositionsAbsolute[Culoare.Albastru] = new Point[]
+            {
+                new Point(53, 375),
+                new Point(110, 375),
+                new Point(53, 440),
+                new Point(110, 440)
+            };
+        }
+
+
 
         public bool EsteRandulJucatorului(Culoare culoarePiesa)
         {
@@ -199,36 +173,37 @@ namespace NuTeSuparaFrate
             //toate calculele locatiilor pionilor
         {
             if (piesa.EsteLaFinal)
-                return Point.Empty;
+                return new Point(-100,-100);
+
+            if (piesa.EsteInBaza)
+            {
+                int indexPiesa = GetIndexPiesaInJucator(piesa);
+                return BasePositionsAbsolute[piesa.Culoare][indexPiesa];
+            }
 
             if(piesa.PozitieCurenta>=0 && piesa.PozitieCurenta<boardPositions.Count)
             {
                 var pt = boardPositions[piesa.PozitieCurenta];
+                
                 return new Point(pt.X, pt.Y);
             }
+            return Point.Empty;
+        }
 
-            int indexPiesaSet = -1;
+        private int GetIndexPiesaInJucator(Piesa piesa)
+        {
             foreach(var jucator in Jucatori)
             {
                 if(jucator.Culoare==piesa.Culoare)
                 {
                     for(int i=0;i<jucator.Piese.Length;i++)
                     {
-                        if (jucator.Piese[i]==piesa)
-                        {
-                            indexPiesaSet = i;
-                            break;
-                        }
+                        if (jucator.Piese[i] == piesa)
+                            return i;
                     }
-                    break;
                 }
             }
-
-            if(indexPiesaSet!=-1)
-            {
-                return BasePositionsAbsolute[piesa.Culoare][indexPiesaSet];
-            }
-            return Point.Empty;
+            return -1;
         }
 
         public int AruncaZar()
@@ -237,10 +212,12 @@ namespace NuTeSuparaFrate
             return ValoareZar;
         }
 
-
         public bool IncearcaMutare(Piesa piesa, int zar)
         {
             if (piesa.Culoare != Jucatori[IndexJucatorCurent].Culoare)
+                return false;
+
+            if (!Jucatori[IndexJucatorCurent].PoateMutaPiesa(piesa, zar))
                 return false;
 
             if (piesa.EsteInBaza)
@@ -259,18 +236,19 @@ namespace NuTeSuparaFrate
 
             int pasiViitori = piesa.PasiParcursi + zar;
 
-            if(pasiViitori>56)
+            if (pasiViitori >= 56)
             {
-                if(pasiViitori==57)
-                {
+                //if (pasiViitori == 56)
+                //{
+                    piesa.Muta(-1, 57);
                     piesa.EsteLaFinal = true;
                     return true;
-                }
-                return false;
+                //}
+                //return false;
             }
 
             int noulIndexBoard;
-            if(pasiViitori<51)
+            if (pasiViitori < 51)
             {
                 noulIndexBoard = (PunctStartGlobal[piesa.Culoare] + pasiViitori) % 52;
             }
@@ -286,38 +264,28 @@ namespace NuTeSuparaFrate
                 VerificaCaptura(piesa);
 
             return true;
-
-            
         }
 
         private bool ExistaBlocajPropriu(int pozitie, Culoare culoare)
         {
+            Jucator jucatorCurent = Jucatori[IndexJucatorCurent];
             int count = 0;
-            foreach (var jucator in Jucatori)
+            foreach(var piesa in jucatorCurent.Piese)
             {
-                if (jucator.Culoare == culoare)
-                {
-                    foreach (var piesa in jucator.Piese)
-                    {
-                        if (piesa.PozitieCurenta == pozitie)
-                        {
-                           count++;
-                        }
-                    }
-                }
+                if (piesa.PozitieCurenta == pozitie && !piesa.EsteInBaza)
+                    count++;
             }
+
             return count >= 2;
         }
 
         private void VerificaCaptura(Piesa piesaMutata)
         {
-            bool estePozitieSigura = false;
             foreach(int pozitieSigura in PozitiiSigure)
             {
                 if(piesaMutata.PozitieCurenta==pozitieSigura)
                 {
-                    estePozitieSigura |= true;
-                    break;
+                    return;
                 }
             }
 
@@ -326,7 +294,6 @@ namespace NuTeSuparaFrate
                 if (jucatorAdversar.Culoare == piesaMutata.Culoare)
                 {
                     continue;
-
                 }
 
                 Piesa piesaDeCapturat = null;
@@ -341,7 +308,7 @@ namespace NuTeSuparaFrate
                     }
                 }
 
-                if (countPieseAdverse == 1)
+                if (countPieseAdverse == 1 && piesaDeCapturat!=null)
                 {
                     piesaDeCapturat.TrimiteInBaza();
                     return;
@@ -352,38 +319,44 @@ namespace NuTeSuparaFrate
 
         public void TreciLaUrmatorulJucator()
         {
+            numarSaseConsecutiv = 0;
             IndexJucatorCurent = (IndexJucatorCurent + 1) % Jucatori.Count;
+        }
+
+        public bool SaseConsecutiv(int zar)
+        {
+            if (zar == 6)
+            {
+                numarSaseConsecutiv++;
+                if (numarSaseConsecutiv == 3)
+                {
+                    TreciLaUrmatorulJucator();
+                    return true;
+                }
+            }
+            else
+            {
+                numarSaseConsecutiv = 0;
+            }
+            return false;
         }
 
         public bool ExistaMutariValide(int zar)
         {
-            IJucator jucatorCurent = Jucatori[IndexJucatorCurent];
-
-            foreach (var piesa in jucatorCurent.Piese)
-            {
-                if (piesa.EsteInBaza)
-                {
-                    if (zar == 6)
-                    {
-                        int pozitieStart = PunctStartGlobal[piesa.Culoare];
-                        if (!ExistaBlocajPropriu(pozitieStart, piesa.Culoare))
-                            return true;
-                    }
-                }
-                else if (!piesa.EsteLaFinal)
-                {
-                    if (piesa.PozitieCurenta >= 52)
-                    {
-                        if (piesa.PozitieCurenta + zar <= 58)
-                            return true;
-                    }
-                    else
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            return Jucatori[IndexJucatorCurent].AreMutariPosibile(zar, 52);
         }
+
+        public Jucator VerificaCastigator()
+        {
+            foreach(var jucator in Jucatori)
+            {
+                if (jucator.JocFinalizat())
+                    return jucator;
+            }
+            return null;
+
+        }
+
+        
     }
 }

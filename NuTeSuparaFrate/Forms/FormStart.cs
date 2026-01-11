@@ -23,8 +23,6 @@ namespace NuTeSuparaFrate.Forms
             cbCuloare.SelectedIndex = 0;
         }
 
-
-
         private void btnStartGame_Click(object sender, EventArgs e)
         {
             List<Culoare> culoriAlese = new List<Culoare>();
@@ -39,18 +37,19 @@ namespace NuTeSuparaFrate.Forms
 
             if (culoriAlese.Count < 2)
             {
-                MessageBox.Show("Jocul necesita minim 2 jucatori. Selecteaza cel putin 2 culori.");
+                MessageBox.Show("Jocul necesita minim 2 jucatori. Selecteaza cel putin 2 culori!");
                 return;
             }
-            Culoare culoareLocal;
+            Culoare culoareLocal = (Culoare)cbCuloare.SelectedItem; ;
+            bool participa = false;
 
-            if (cbCuloare.SelectedItem == null || !Enum.TryParse(cbCuloare.SelectedItem.ToString(), out culoareLocal))
+            foreach(var c in culoriAlese)
             {
-                MessageBox.Show("Alege o culoare pentru tine din caseta de selectie.");
-                return;
+                if (c == culoareLocal)
+                    participa = true;
             }
 
-            if (!culoriAlese.Contains(culoareLocal))
+            if(!participa)
             {
                 MessageBox.Show($"Trebuie sa incluzi culoarea {culoareLocal} in selectia de jucatori");
                 return;

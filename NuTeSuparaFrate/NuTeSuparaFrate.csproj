@@ -100,19 +100,40 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\LudoBoard.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\BlueToken.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\GreenToken.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\YellowToken.png" />
+    <None Include="Resources\Dice_1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\LudoBoard.png" />
+    <None Include="Resources\Dice_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dice_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dice_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dice_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dice_6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dice_Default.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\RedToken.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YellowToken.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
