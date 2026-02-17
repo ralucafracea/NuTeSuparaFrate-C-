@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NuTeSuparaFrate.Forms
@@ -28,12 +22,12 @@ namespace NuTeSuparaFrate.Forms
             List<Culoare> culoriAlese = new List<Culoare>();
             if (cbRosu.Checked)
                 culoriAlese.Add(Culoare.Rosu);
-            if (cbAlbastru.Checked)
-                culoriAlese.Add(Culoare.Albastru);
             if (cbGalben.Checked)
                 culoriAlese.Add(Culoare.Galben);
+            if (cbAlbastru.Checked)
+                culoriAlese.Add(Culoare.Albastru);
             if (cbVerde.Checked)
-                culoriAlese.Add(Culoare.Verde);
+                culoriAlese.Add(Culoare.Verde);     
 
             if (culoriAlese.Count < 2)
             {

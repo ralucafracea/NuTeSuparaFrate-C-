@@ -62,6 +62,18 @@ namespace NuTeSuparaFrate.Forms
 
         }
 
+        private Image GetTokenImage(Culoare culoare)
+        {
+            switch (culoare)
+            {
+                case Culoare.Rosu: return Properties.Resources.RedToken;
+                case Culoare.Verde: return Properties.Resources.GreenToken;
+                case Culoare.Albastru: return Properties.Resources.BlueToken;
+                case Culoare.Galben: return Properties.Resources.YellowToken;
+                default: return null;
+            }
+        }
+
         private void InitializePlayersGraphics()
         {
 
@@ -76,35 +88,22 @@ namespace NuTeSuparaFrate.Forms
             {
                 foreach (var piesa in jucator.Piese)
                 {
-                    PictureBox token = new PictureBox();
-                    token.Width = P;
-                    token.Height = P;
-                    token.Parent = pbBoard;
-                    token.BackColor = Color.Transparent;
-                    token.SizeMode = PictureBoxSizeMode.StretchImage;
-                    token.Image = GetTokenImage(jucator.Culoare);
+                    PictureBox pbToken = new PictureBox();
+                    pbToken.Width = P;
+                    pbToken.Height = P;
+                    pbToken.Parent = pbBoard;
+                    pbToken.BackColor = Color.Transparent;
+                    pbToken.SizeMode = PictureBoxSizeMode.StretchImage;
+                    pbToken.Image = GetTokenImage(jucator.Culoare);
                     Point pozitieLogica = joc.DeterminaPozitieVizuala(piesa);
-                    token.Location = new Point(pozitieLogica.X - pbBoard.Location.X, pozitieLogica.Y - pbBoard.Location.Y);
-                    token.Tag = piesa;
-                    token.Click += Token_Click;
-                    tokenMap.Add(piesa, token);
+                    pbToken.Location = new Point(pozitieLogica.X - pbBoard.Location.X, pozitieLogica.Y - pbBoard.Location.Y);
+                    pbToken.Tag = piesa;
+                    pbToken.Click += Token_Click;
+                    tokenMap.Add(piesa, pbToken);
 
                 }
             }
         }
-
-        private Image GetTokenImage(Culoare culoare)
-        {
-            switch (culoare)
-            {
-                case Culoare.Rosu: return Properties.Resources.RedToken;
-                case Culoare.Verde: return Properties.Resources.GreenToken;
-                case Culoare.Albastru: return Properties.Resources.BlueToken;
-                case Culoare.Galben: return Properties.Resources.YellowToken;
-                default: return null;
-            }
-        }
-
 
         private void btnRollDice_Click(object sender, EventArgs e)
         {
@@ -116,14 +115,9 @@ namespace NuTeSuparaFrate.Forms
 
             int zarAruncat = joc.AruncaZar();
             pbZar.Image = GetDiceImage(zarAruncat);
-            int zarFinal = joc.Jucatori[joc.IndexJucatorCurent].AjusteazaValoareZar(zarAruncat);
+            int zarFinal = joc.Jucatori[joc.IndexJucatorCurent].AjusteazaValoareZar(zarAruncat);  
 
-            this.zarCurent=zarFinal;
-
-            if (this.zarCurent > zarAruncat)
-            {
-                lblStatus.Text = "Noroc! Primești +1 la mișcare!";
-            }
+            this.zarCurent=zarFinal;        
 
             var jucatorCrt = joc.Jucatori[joc.IndexJucatorCurent];
 
@@ -140,7 +134,7 @@ namespace NuTeSuparaFrate.Forms
             {
                 btnRollDice.Enabled = false;
 
-                lblStatus.Text = $"{jucatorCrt.Culoare}: Alege o piesa!";
+                lblStatus.Text = $"{jucatorCrt.Culoare}: Alege o piesa! Ai dat {zarFinal}!";
             }
             else
             {
@@ -176,7 +170,6 @@ namespace NuTeSuparaFrate.Forms
             {
                 UpdateBoard();
                 zarCurent = 0;
-
 
                 var castigator = joc.VerificaCastigator();
                 if (castigator != null)
@@ -282,22 +275,9 @@ namespace NuTeSuparaFrate.Forms
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void FormGame_Load(object sender, EventArgs e)
-        {
-
-        }
         private void FormGame_FormClosed_1(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
-        }
-
-        private void pbBoard_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void FormGame_SizeChanged(object sender, EventArgs e)

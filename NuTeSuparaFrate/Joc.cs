@@ -1,28 +1,33 @@
-﻿using NuTeSuparaFrate.Forms;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Drawing;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace NuTeSuparaFrate
 {
-    public struct PunctTabla
-    {
-        public int X { get; set; }
-        public int Y { get; set; }
-    }
+  
     public class Joc
     {
         public List<Jucator> Jucatori { get; set; }
         public int IndexJucatorCurent { get; private set; } = 0;
         private Random random = new Random();
         private List<PunctTabla> boardPositions = new List<PunctTabla>();
-        private Dictionary<Culoare, Point[]> BasePositionsAbsolute = new Dictionary<Culoare, Point[]>();
         public int numarSaseConsecutiv = 0;
         public int ValoareZar { get; private set; }
+        private Dictionary<Culoare, Point[]> BasePositionsAbsolute = new Dictionary<Culoare, Point[]>();
+        private readonly Dictionary<Culoare, int> PunctStartGlobal = new Dictionary<Culoare, int>
+        {
+            {Culoare.Rosu, 0},
+            {Culoare.Verde, 13 },
+            {Culoare.Galben,26 },
+            {Culoare.Albastru,39 }
+        };
+
+        private readonly int[] PozitiiSigure = { 0, 8, 13, 21, 26, 34, 39, 47 };
+        public struct PunctTabla
+        {
+            public int X { get; set; }
+            public int Y { get; set; }
+        }
 
         public Joc(List<Culoare> culoriParticipante)
         {
@@ -44,17 +49,7 @@ namespace NuTeSuparaFrate
                 }
             }
 
-        }
-
-        private readonly Dictionary<Culoare, int> PunctStartGlobal = new Dictionary<Culoare, int>
-        {
-            {Culoare.Rosu, 0},
-            {Culoare.Verde, 13 },
-            {Culoare.Galben,26 },
-            {Culoare.Albastru,39 }
-        };
-
-        private readonly int[] PozitiiSigure = { 0, 8, 13, 21, 26, 34, 39, 47 };
+        }   
 
         public void InitializeazaHarta(int P)
         {
@@ -100,7 +95,7 @@ namespace NuTeSuparaFrate
             
         }
 
-        private void AdaugaHomePath(int P)
+        public void AdaugaHomePath(int P)
         {
             int[,] homeRosu = new int[,] 
             { 
@@ -142,7 +137,7 @@ namespace NuTeSuparaFrate
 
             BasePositionsAbsolute[Culoare.Rosu] = new Point[]
             {      
-                new Point(53, 55),
+                new Point(53,55),
                 new Point(110, 55),
                 new Point(53, 115),
                 new Point(110, 115)
@@ -172,9 +167,6 @@ namespace NuTeSuparaFrate
                 new Point(110, 440)
             };
         }
-
-
-
         public bool EsteRandulJucatorului(Culoare culoarePiesa)
         {
             return Jucatori[IndexJucatorCurent].Culoare == culoarePiesa;
@@ -249,13 +241,13 @@ namespace NuTeSuparaFrate
 
             if (pasiViitori >= 56)
             {
-                //if (pasiViitori == 56)
-                //{
+                if (pasiViitori == 56)
+                {
                     piesa.Muta(-1, 57);
                     piesa.EsteLaFinal = true;
                     return true;
-                //}
-                //return false;
+                }
+                return false;
             }
 
             int noulIndexBoard;
@@ -267,6 +259,11 @@ namespace NuTeSuparaFrate
             {
                 int bazaHome = 52 + ((int)piesa.Culoare * 6);
                 noulIndexBoard = bazaHome + (pasiViitori - 51);
+            }
+
+            if (ExistaBlocajPropriu(noulIndexBoard, piesa.Culoare))
+            {
+                return false; 
             }
 
             piesa.Muta(noulIndexBoard, pasiViitori);

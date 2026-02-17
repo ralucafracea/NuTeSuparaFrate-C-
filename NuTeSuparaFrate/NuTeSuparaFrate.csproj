@@ -67,6 +67,8 @@
     </Compile>
     <Compile Include="Joc.cs" />
     <Compile Include="Jucator.cs" />
+    <Compile Include="JucatorNorocos.cs" />
+    <Compile Include="JucatorStandard.cs" />
     <Compile Include="Piesa.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

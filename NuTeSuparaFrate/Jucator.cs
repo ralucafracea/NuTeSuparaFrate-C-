@@ -54,22 +54,4 @@ namespace NuTeSuparaFrate
             return (piesa.PasiParcursi + valoareZar <= 57);
         }
     }
-
-    public class JucatorStandard : Jucator
-    {
-        public JucatorStandard(Culoare culoare) : base(culoare) { }
- 
-    }
-
-    public class JucatorNorocos : Jucator
-    {
-        public JucatorNorocos(Culoare culoare) : base(culoare) { }
-        public override int AjusteazaValoareZar(int valoareInitiala)
-        {
-            if (valoareInitiala>1 && valoareInitiala < 5)
-                return valoareInitiala + 1;
-            return valoareInitiala;
-        }
-    }
-
 }

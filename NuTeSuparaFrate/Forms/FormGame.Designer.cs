@@ -58,7 +58,6 @@
             this.lblJucatorCurent.Size = new System.Drawing.Size(92, 16);
             this.lblJucatorCurent.TabIndex = 3;
             this.lblJucatorCurent.Text = "Jucator Curent";
-            this.lblJucatorCurent.Click += new System.EventHandler(this.label1_Click);
             // 
             // pbZar
             // 
@@ -83,7 +82,6 @@
             this.pbBoard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbBoard.TabIndex = 2;
             this.pbBoard.TabStop = false;
-            this.pbBoard.Click += new System.EventHandler(this.pbBoard_Click);
             // 
             // FormGame
             // 
@@ -100,7 +98,6 @@
             this.Name = "FormGame";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormGame_FormClosed_1);
-            this.Load += new System.EventHandler(this.FormGame_Load);
             this.SizeChanged += new System.EventHandler(this.FormGame_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pbZar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBoard)).EndInit();
